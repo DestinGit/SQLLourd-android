@@ -14,11 +14,12 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 // -------------------------------------
 public class GestionnaireOuvertureSQLite extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String DB_NAME = "cours.db";
 
     private static final String DROP_TABLE_PAYS = "DROP TABLE IF EXISTS pays";
-    private static final String CREATE_TABLE_PAYS = "CREATE TABLE IF NOT EXISTS pays(id_pays INTEGER PRIMARY KEY AUTOINCREMENT, nom_pays VARCHAR(50) NOT NULL UNIQUE)";
+    private static final String CREATE_TABLE_PAYS = "CREATE TABLE IF NOT EXISTS pays(id_pays INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " nom_pays VARCHAR(50) NOT NULL UNIQUE, iso2 VARCHAR(2) NOT NULL UNIQUE)";
 
     // --- Constructeur
     // -------------------------------
@@ -39,7 +40,9 @@ public class GestionnaireOuvertureSQLite extends SQLiteOpenHelper {
          * Pour les tests
          */
         // --- Remplissage de la table pays
-        abd.execSQL("INSERT INTO pays(nom_pays) VALUES('France')");
+        abd.execSQL("INSERT INTO pays(nom_pays, iso2) VALUES('France', '01')");
+        abd.execSQL("INSERT INTO pays(nom_pays, iso2) VALUES('ESPAGNE', '02')");
+        abd.execSQL("INSERT INTO pays(nom_pays, iso2) VALUES('ITALIE', '03')");
     } /// onCreate()
 
     @Override

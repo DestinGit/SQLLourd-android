@@ -46,18 +46,20 @@ public class BDCreate extends AppCompatActivity implements View.OnClickListener{
 
             // Insertion dans la table
             // cf GOS + ce qui suit
-            ContentValues hmValeurs = new ContentValues();
-            hmValeurs.put("nom_Pays", "Italie");
-            long llNum = bd.insert("pays", null, hmValeurs);
+//            ContentValues hmValeurs = new ContentValues();
+//            hmValeurs.put("nom_Pays", "Italie");
+//            long llNum = bd.insert("pays", null, hmValeurs);
 
             // Visualisation de la table
             // --- Sans WHERE : une projection
-            String[] cols = {"id_pays", "nom_pays"};
+            String[] cols = {"id_pays", "nom_pays", "iso2"};
             Cursor curseur = bd.query("pays", cols, null, null, null, null, null);
             while (curseur.moveToNext()) {
                 lsbMessage.append(curseur.getInt(0));
                 lsbMessage.append("-");
                 lsbMessage.append(curseur.getString(1));
+                lsbMessage.append("-");
+                lsbMessage.append(curseur.getString(2));
                 lsbMessage.append("\n");
             }
             curseur.close();
